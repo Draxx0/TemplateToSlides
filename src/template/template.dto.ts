@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsArray,
-  ValidateNested,
-  IsBoolean,
-  IsOptional,
-} from 'class-validator';
+import { IsString, ValidateNested, IsOptional, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class createTemplateDTO {
@@ -13,14 +7,6 @@ export class createTemplateDTO {
 
   @IsString()
   templateCode: string;
-}
-
-class ImageDTO {
-  @IsString()
-  url: string;
-
-  @IsBoolean()
-  isFragment: boolean;
 }
 
 export class SlideDTO {
@@ -33,15 +19,18 @@ export class SlideDTO {
 
   @IsOptional()
   @IsString()
-  slideTransition?: string;
+  slideTeam?: string;
 
-  @IsBoolean()
-  isStack: boolean;
+  @IsString()
+  slideTransition: string;
 
+  @IsOptional()
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => ImageDTO)
-  data: ImageDTO[];
+  positions: [x: number, y: number];
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }
 
 export class GetTemplateDTO {

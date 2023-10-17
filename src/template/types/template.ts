@@ -6,19 +6,15 @@ export interface GetTemplateData {
 interface Slide {
   slideTitle: string;
   slideDescription?: string;
-  slideTransition?: Transition;
-  images?: {
-    isStack: boolean;
-    data: Array<Image>;
-  };
-}
-
-interface Image {
-  url: string;
-  isFragment: boolean;
+  slideTeam?: string;
+  slideTransition: Transition;
+  positions: [x: number, y: number];
+  image?: string;
 }
 
 type Transition = 'zoom' | 'fast' | 'slide' | 'convex' | 'concave' | 'fade';
+
+export type Stack = 'r-stack' | 'r-stretch' | 'r-fit-text';
 
 export interface Template {
   id: string;
