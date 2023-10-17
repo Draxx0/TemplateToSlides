@@ -19,14 +19,10 @@ export class SlideDTO {
 
   @IsOptional()
   @IsString()
-  slideTeam?: string;
+  slideSmallText?: string;
 
   @IsString()
   slideTransition: string;
-
-  @IsOptional()
-  @IsArray()
-  positions: [x: number, y: number];
 
   @IsOptional()
   @IsString()

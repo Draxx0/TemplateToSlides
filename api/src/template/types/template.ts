@@ -6,9 +6,8 @@ export interface GetTemplateData {
 interface Slide {
   slideTitle: string;
   slideDescription?: string;
-  slideTeam?: string;
+  slideSmallText?: string;
   slideTransition: Transition;
-  positions: [x: number, y: number];
   image?: string;
 }
 
