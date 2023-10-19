@@ -13,25 +13,26 @@ export class TemplateController {
   async createTemplate(
     @Body() templateData: createTemplateDTO,
   ): Promise<string> {
-    const { templateName, templateCode } = templateData;
-    return await this.templateService.createTemplate({
-      templateName,
-      templateCode,
-    });
+    return await this.templateService.createTemplate({ templateData });
   }
 
   @Post('/generate-template')
   async generateTemplate(@Body() data: GetTemplateDTO): Promise<string> {
-    const { templateName, templateData } = data;
+    const { templateId, templateData } = data;
     return await this.templateService.generateTemplate({
-      templateName,
+      templateId,
       templateData,
     });
   }
 
+  @Get(':id')
+  async getTemplate(@Param('id') id: string): Promise<Template | undefined> {
+    return await this.templateService.getTemplate(id);
+  }
+
   @Get()
-  async getTemplate(): Promise<Template[] | undefined> {
-    return await this.templateService.getTemplate();
+  async getTemplates(): Promise<Template[] | undefined> {
+    return await this.templateService.getTemplates();
   }
 
   @Delete(':id')

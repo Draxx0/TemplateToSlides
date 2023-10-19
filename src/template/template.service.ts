@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Template } from './template.entity';
-import { GetTemplateDTO } from './template.dto';
+import { GetTemplateDTO, createTemplateDTO } from './template.dto';
 import { generateTemplateWithData } from 'src/utils/generateTemplateWithData';
 
 @Injectable()
@@ -13,21 +13,21 @@ export class TemplateService {
   ) {}
 
   async createTemplate({
-    templateName,
-    templateCode,
+    templateData,
   }: {
-    templateName: string;
-    templateCode: string;
+    templateData: createTemplateDTO;
   }): Promise<string> {
+    const { templateCode, templateName, templateSchema } = templateData;
     try {
       const template = this.templateRepository.create({
-        templateName,
         templateCode,
+        templateName,
+        templateSchema,
       });
 
       await this.templateRepository.save(template);
     } catch (error) {
-      console.error('An error occured', { error });
+      console.log(error);
       throw new Error('An error occured during template creation');
     }
 
@@ -36,7 +36,7 @@ export class TemplateService {
 
   async generateTemplate(data: GetTemplateDTO) {
     const template = await this.templateRepository.findOneBy({
-      templateName: data.templateName,
+      id: data.templateId,
     });
     if (!template) {
       throw new Error('template not found');
@@ -49,7 +49,7 @@ export class TemplateService {
     return templateFormatted;
   }
 
-  async getTemplate() {
+  async getTemplates() {
     const templates = await this.templateRepository.find();
 
     if (!templates) {
@@ -57,6 +57,16 @@ export class TemplateService {
     }
 
     return templates;
+  }
+
+  async getTemplate(id: string) {
+    try {
+      return await this.templateRepository.findOneBy({
+        id,
+      });
+    } catch (error) {
+      throw new Error('Template not found');
+    }
   }
 
   async deleteTemplate(id: string) {

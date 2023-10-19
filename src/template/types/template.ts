@@ -1,14 +1,28 @@
 export interface GetTemplateData {
-  templateName: string;
+  templateId: string;
   templateData: Array<Slide>;
 }
 
-interface Slide {
+export interface Slide {
   slideTitle: string;
   slideDescription?: string;
   slideSmallText?: string;
   slideTransition: Transition;
   image?: string;
+}
+
+export interface SlideSchema {
+  slideId: number;
+  slideTitle: SlideSchemaParams;
+  slideDescription: SlideSchemaParams;
+  slideSmallText: SlideSchemaParams;
+  slideTransition: SlideSchemaParams;
+  image: SlideSchemaParams;
+}
+
+export interface SlideSchemaParams {
+  text: string;
+  isPresent: boolean;
 }
 
 type Transition = 'zoom' | 'fast' | 'slide' | 'convex' | 'concave' | 'fade';
