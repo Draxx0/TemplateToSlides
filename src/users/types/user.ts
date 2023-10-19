@@ -1,5 +1,7 @@
-export interface User {
+export interface RequestUser {
   id: string;
+  username: string;
+  sub: string;
+  iat: number;
   email: string;
-  password: string;
 }

@@ -4,6 +4,7 @@ import { User } from './user.entity';
 import { createUserDTO } from './user.dto';
 import { DeleteResult } from 'typeorm';
 import { AuthService } from 'src/auth/auth.service';
+import { TokenObject } from 'src/auth/types/auth';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +13,7 @@ export class UsersController {
     private readonly authService: AuthService,
   ) {}
   @Post()
-  async createUser(@Body() body: createUserDTO): Promise<User> {
+  async createUser(@Body() body: createUserDTO): Promise<TokenObject> {
     const { password: pass, email } = body;
     await this.userService.createUser(body);
 
