@@ -46,7 +46,7 @@ export class TemplateService {
       templateCode,
       slides: data.templateData,
     });
-    return templateFormatted;
+    return JSON.stringify(templateFormatted);
   }
 
   async getTemplates() {
