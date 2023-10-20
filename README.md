@@ -45,7 +45,7 @@ in your web brower.
 
 ## Requirements
 
-​
+​Env variablrd
 
 ```
 PORT
@@ -59,11 +59,25 @@ JWT_SECRET
 commands :
 
 ```
-pnpm install
-docker-compose up -d
-pnpm run dev
-​
+git clone https://github.com/Draxx0/TemplateToSlides-api.git
 ```
+
+```
+cd ./TemplateToSlides-api
+```
+
+```
+pnpm install
+```
+
+```
+docker-compose up -d
+```
+
+```
+pnpm run dev
+```​
+
 
 ​
 
